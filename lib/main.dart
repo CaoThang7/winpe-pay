@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:winpe_pay/screens/splash/splash_screen.dart';
+import 'responsive/mobile_screen_layout.dart';
+import 'responsive/responsive_layout.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,6 +33,8 @@ class _MyAppState extends State<MyApp> {
           ),
           useMaterial3: true, // can remove this line
         ),
-        home: const SplashScreen());
+        home: ResponsiveLayout(
+          mobileScreenLayout: MobileScreenLayout(),
+        ));
   }
 }
