@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: 20,
                 ),
                 Text(
-                  "Winpe Pay",
+                  "Winpe Pay App",
                   style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
