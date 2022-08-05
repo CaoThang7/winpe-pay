@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "227271402705",
+    "project_id": "winpe-pay",
+    "storage_bucket": "winpe-pay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227271402705:android:489da6174606783b2851f0",
+        "android_client_info": {
+          "package_name": "com.example.winpe_pay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227271402705-rn7qekke8vfotbjvglsq5rda9gr8i94a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4YMIzjBNT-I_lJdtRcPbmlm7GM_Q4Hyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227271402705-rn7qekke8vfotbjvglsq5rda9gr8i94a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
