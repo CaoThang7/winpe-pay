@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:winpe_pay/screens/splash/splash_screen.dart';
+import 'package:winpe_pay/utils/colors.dart';
 import 'responsive/mobile_screen_layout.dart';
 import 'responsive/responsive_layout.dart';
 
@@ -21,14 +22,14 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Winpe Pay',
         theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
+          scaffoldBackgroundColor: mobileBackgroundColor,
           colorScheme: const ColorScheme.light(
-            primary: Color.fromRGBO(255, 153, 0, 1),
+            primary: colorScheme,
           ),
           appBarTheme: const AppBarTheme(
             elevation: 0,
             iconTheme: IconThemeData(
-              color: Colors.black,
+              color: colorScheme,
             ),
           ),
           useMaterial3: true, // can remove this line
