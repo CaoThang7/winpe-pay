@@ -27,8 +27,15 @@ class _SplashScreenState extends State<SplashScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                // Name app
-                Text("Winpe Pay", style: textApp)
+                Text(
+                  "Winpe Pay App",
+                  style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Arsenal-Bold',
+                      fontStyle: FontStyle.italic,
+                      color: Colors.black),
+                )
               ],
             ),
             // nextScreen: HomeScreen(),

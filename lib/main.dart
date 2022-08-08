@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Winpe Pay',
+        title: 'Winpe Pay App',
         theme: ThemeData(
           scaffoldBackgroundColor: mobileBackgroundColor,
           colorScheme: const ColorScheme.light(
