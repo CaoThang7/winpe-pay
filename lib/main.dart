@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:winpe_pay/router/router.dart';
 import 'package:winpe_pay/screens/splash/splash_screen.dart';
 import 'package:winpe_pay/utils/colors.dart';
 import 'responsive/mobile_screen_layout.dart';
 import 'responsive/responsive_layout.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp;
   runApp(MyApp());
 }
 
@@ -34,6 +38,7 @@ class _MyAppState extends State<MyApp> {
           ),
           useMaterial3: true, // can remove this line
         ),
+        onGenerateRoute: (settings) => generateRoute(settings),
         home: ResponsiveLayout(
           mobileScreenLayout: MobileScreenLayout(),
         ));
