@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:winpe_pay/resources/auth_methods.dart';
 import 'package:winpe_pay/screens/login/otp_screen.dart';
 import 'package:winpe_pay/screens/login/widgets/app_bars.dart';
 import 'package:winpe_pay/screens/login/widgets/below_app_bar.dart';
@@ -16,6 +17,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _phoneController = TextEditingController();
+  final AuthMethods authMethods = AuthMethods();
   @override
   void dispose() {
     super.dispose();
@@ -26,6 +28,10 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     _phoneController.addListener(() => setState(() {}));
+  }
+
+  void phoneSignIn() {
+    authMethods.phoneSignIn(context, _phoneController.text);
   }
 
   @override
@@ -61,12 +67,9 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomButton(
                 text: 'Tiếp tục',
                 onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    OtpScreen.routeName,
-                  );
+                  phoneSignIn();
                 },
-              )
+              ),
             ],
           ),
         ),

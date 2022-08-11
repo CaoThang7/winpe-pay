@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:winpe_pay/resources/auth_methods.dart';
 import 'package:winpe_pay/screens/login/widgets/styles.dart';
 import 'package:winpe_pay/utils/colors.dart';
 import 'package:winpe_pay/utils/global_variable.dart';
@@ -7,7 +8,8 @@ import 'package:winpe_pay/widgets/text_field_input.dart';
 
 class OtpScreen extends StatefulWidget {
   static const String routeName = '/otp-screen';
-  const OtpScreen({Key? key}) : super(key: key);
+  final String verifiId;
+  const OtpScreen({Key? key, required this.verifiId}) : super(key: key);
 
   @override
   _OtpScreenState createState() => _OtpScreenState();
@@ -15,6 +17,7 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   final TextEditingController _otpController = TextEditingController();
+  final AuthMethods authMethods = AuthMethods();
   @override
   void dispose() {
     super.dispose();
@@ -25,6 +28,10 @@ class _OtpScreenState extends State<OtpScreen> {
   void initState() {
     super.initState();
     _otpController.addListener(() => setState(() {}));
+  }
+
+  void verifyOTP() {
+    authMethods.verifyOTP(context, _otpController.text.trim(), widget.verifiId);
   }
 
   @override
@@ -108,7 +115,9 @@ class _OtpScreenState extends State<OtpScreen> {
                     ),
                     CustomButton(
                       text: 'Đăng nhập',
-                      onTap: () {},
+                      onTap: () {
+                        verifyOTP();
+                      },
                     ),
                   ],
                 ),

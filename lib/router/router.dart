@@ -10,9 +10,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         builder: (_) => const LoginScreen(),
       );
     case OtpScreen.routeName:
+      String verifiId = routeSettings.arguments as String;
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => const OtpScreen(),
+        builder: (_) => OtpScreen(
+          verifiId: verifiId,
+        ),
       );
     default:
       return MaterialPageRoute(
