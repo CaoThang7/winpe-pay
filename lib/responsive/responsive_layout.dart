@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:winpe_pay/resources/auth_methods.dart';
 
 class ResponsiveLayout extends StatefulWidget {
   final Widget mobileScreenLayout;
@@ -12,6 +13,14 @@ class ResponsiveLayout extends StatefulWidget {
 }
 
 class _ResponsiveLayoutState extends State<ResponsiveLayout> {
+  final AuthMethods _authMethods = AuthMethods();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _authMethods.getUserDetails(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
