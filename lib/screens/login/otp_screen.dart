@@ -4,6 +4,7 @@ import 'package:winpe_pay/screens/login/widgets/styles.dart';
 import 'package:winpe_pay/utils/colors.dart';
 import 'package:winpe_pay/utils/global_variable.dart';
 import 'package:winpe_pay/widgets/custom_button.dart';
+import 'package:winpe_pay/widgets/loader.dart';
 import 'package:winpe_pay/widgets/text_field_input.dart';
 
 class OtpScreen extends StatefulWidget {
