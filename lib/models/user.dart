@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class User {
-  final String phone;
-  final String uid;
+  final String? phone;
+  final String? uid;
   final DateTime? dateCreated;
   final DateTime? dateSignedIn;
   const User({
@@ -12,15 +12,12 @@ class User {
     required this.dateSignedIn,
   });
 
-  static User fromSnap(DocumentSnapshot snap) {
-    var snapshot = snap.data() as Map<String, dynamic>;
-
-    return User(
-        phone: snapshot["phone"],
-        uid: snapshot["uid"],
-        dateCreated: snapshot['dateCreated'],
-        dateSignedIn: snapshot['dateSignedIn']);
-  }
+  static User fromJson(Map<String, dynamic> json) => User(
+        phone: json["phone"],
+        uid: json["uid"],
+        dateCreated: json['dateCreated'].toDate(),
+        dateSignedIn: json['dateSignedIn'].toDate(),
+      );
 
   Map<String, dynamic> toJson() => {
         "phone": phone,

@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:winpe_pay/providers/user_provider.dart';
 import 'package:winpe_pay/screens/login/otp_screen.dart';
 import 'package:winpe_pay/utils/utils.dart';
 import 'package:translator/translator.dart';
 import 'dart:async';
 import 'package:winpe_pay/models/user.dart' as model;
 import 'package:intl/intl.dart';
+import 'package:winpe_pay/widgets/bottom_bar.dart';
 
 class AuthMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -49,7 +52,7 @@ class AuthMethods {
         codeSent: ((String verificationId, int? resendToken) async {
           verificationID = verificationId;
           showSnackBar(context, 'Nhập số  thành công');
-          Timer(Duration(seconds: 5), () {
+          Timer(Duration(seconds: 4), () {
             Navigator.pushNamed(context, OtpScreen.routeName,
                 arguments: verificationID);
           });
@@ -80,7 +83,6 @@ class AuthMethods {
       );
       // !!! Works only on Android, iOS !!!
       await _auth.signInWithCredential(credential).then((value) async {
-        showSnackBar(context, 'Bạn đã đăng nhập thành công');
         final User user = _auth.currentUser!;
         model.User _user = model.User(
           phone: user.phoneNumber.toString(),
@@ -90,11 +92,33 @@ class AuthMethods {
         );
         // adding user in our database
         await _firestore.collection("users").doc(user.uid).set(_user.toJson());
-      }).onError(
-          (error, stackTrace) => showSnackBar(context, 'Mã OTP không đúng'));
+        showSnackBar(context, 'Bạn đã đăng nhập thành công');
+        getUserDetails(context);
+        Timer(Duration(seconds: 4), () {
+          Navigator.pushNamed(context, BottomBar.routeName);
+        });
+      }).onError((error, stackTrace) {
+        showSnackBar(context, 'Mã OTP không đúng');
+      });
     } catch (e) {
       // showSnackBar(context, e.toString());
       print(e.toString());
+    }
+  }
+
+  // get user details
+  void getUserDetails(
+    BuildContext context,
+  ) async {
+    try {
+      DocumentSnapshot documentSnapshot = await _firestore
+          .collection('users')
+          .doc(_auth.currentUser?.uid)
+          .get();
+      var userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.setUser(documentSnapshot.data()); //set user (using provider)
+    } catch (e) {
+      print("co gi do sai sai");
     }
   }
 }
