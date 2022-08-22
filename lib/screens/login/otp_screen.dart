@@ -18,6 +18,8 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   final TextEditingController _otpController = TextEditingController();
+  String accNo = '';
+  String ifscCode = '';
   final AuthMethods authMethods = AuthMethods();
   @override
   void dispose() {
@@ -32,7 +34,19 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   void verifyOTP() {
-    authMethods.verifyOTP(context, _otpController.text.trim(), widget.verifiId);
+    var accountNo = GlobalVariables().accountNo();
+    var ifscCode = GlobalVariables().ifscCode();
+    setState(() {
+      accNo = accountNo!;
+      ifscCode = ifscCode!;
+    });
+    authMethods.verifyOTP(
+      context, 
+      _otpController.text.trim(), 
+      widget.verifiId, 
+      accNo, 
+      ifscCode!
+    );
   }
 
   @override

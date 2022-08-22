@@ -33,3 +33,24 @@ TextStyle get textWelcomeBack {
     )
   );
 }
+
+TextStyle get textHeaderScreen {
+  return (
+    TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Arsenal-Bold',
+      color: Colors.white
+    )
+  );
+}
+
+TextStyle get textStandard{
+  return (
+    TextStyle(
+      fontSize: 16,
+      fontFamily: 'Roboto',
+      color: primaryColor
+    )
+  );
+}

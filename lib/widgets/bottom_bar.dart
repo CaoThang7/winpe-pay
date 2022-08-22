@@ -45,6 +45,7 @@ class _BottomBarState extends State<BottomBar> {
         children: GlobalVariables.homeScreenItems,
         controller: pageController,
         onPageChanged: onPageChanged,
+        physics: NeverScrollableScrollPhysics(),
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
