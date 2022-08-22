@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:winpe_pay/providers/user_provider.dart';
+import 'package:winpe_pay/screens/account/profile_screen.dart';
+import 'package:winpe_pay/screens/account/widgets/app_bars.dart';
+import 'package:winpe_pay/screens/account/widgets/setting_card.dart';
+import 'package:winpe_pay/utils/global_variable.dart';
+import 'package:winpe_pay/widgets/loader.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -10,18 +13,59 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
+  bool _isLoading = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    LoadingScreen();
+  }
+
+  void LoadingScreen() {
+    _isLoading = true;
+    Future.delayed(const Duration(seconds: 2), () {
+      if (this.mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+  }
+
+  void navigateSetting(var dataSettingsUser) {
+    if (dataSettingsUser == '1') {
+      Navigator.pushNamed(context, ProfileScreen.routeName);
+    } else if (dataSettingsUser == '2') {
+      print("Transaction history");
+    } else if (dataSettingsUser == '3') {
+      print("notification");
+    } else if (dataSettingsUser == '4') {
+      print("sale");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final uid = context.watch<UserProvider>().user;
-    print(uid?.phone);
     return Scaffold(
-      body: Text('${uid?.phone}'),
+      appBar: AppBarAccount(context),
+      body: Container(
+        child: _isLoading
+            ? Loader()
+            : ListView.builder(
+                itemCount: GlobalVariables.userSettings.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  var dataSettings = GlobalVariables.userSettings[index];
+                  return GestureDetector(
+                    onTap: () {
+                      navigateSetting(dataSettings['id']);
+                    },
+                    child:
+                        SettingCard(dataSettings: dataSettings, index: index),
+                  );
+                },
+              ),
+      ),
     );
   }
 }

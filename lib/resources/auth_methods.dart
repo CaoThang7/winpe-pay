@@ -67,11 +67,8 @@ class AuthMethods {
   }
 
   // verifyOTP
-  Future<void> verifyOTP(
-    BuildContext context,
-    String otp,
-    String verifiId,
-  ) async {
+  Future<void> verifyOTP(BuildContext context, String otp, String verifiId,
+      String accNo, String ifscCode) async {
     try {
       if (otp.isEmpty) {
         showSnackBar(context, "OTP không được bỏ trống");
@@ -85,17 +82,24 @@ class AuthMethods {
       await _auth.signInWithCredential(credential).then((value) async {
         final User user = _auth.currentUser!;
         model.User _user = model.User(
-          phone: user.phoneNumber.toString(),
-          uid: user.uid,
-          dateCreated: user.metadata.creationTime,
-          dateSignedIn: DateTime.now(),
-        );
+            phone: user.phoneNumber.toString(),
+            uid: user.uid,
+            dateCreated: user.metadata.creationTime,
+            dateSignedIn: DateTime.now(),
+            photoUrl: "",
+            accNo: accNo,
+            ifscCode: ifscCode,
+            username: "");
         // adding user in our database
         await _firestore.collection("users").doc(user.uid).set(_user.toJson());
         showSnackBar(context, 'Bạn đã đăng nhập thành công');
         getUserDetails(context);
         Timer(Duration(seconds: 4), () {
-          Navigator.pushNamed(context, BottomBar.routeName);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            BottomBar.routeName,
+            (route) => false,
+          );
         });
       }).onError((error, stackTrace) {
         showSnackBar(context, 'Mã OTP không đúng');
