@@ -29,6 +29,24 @@ AppBar AppBarProfile(BuildContext context) {
     ),
     centerTitle: true,
     title: Text("Thông tin cá nhân", style: textHeaderScreen),
+    leading: IconButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        icon: Icon(
+          Icons.arrow_back,
+          color: mobileBackgroundColor,
+        )),
+  );
+}
+
+AppBar AppBarEditProfile(BuildContext context) {
+  return AppBar(
+    flexibleSpace: Container(
+      color: primaryColor,
+    ),
+    centerTitle: true,
+    title: Text("Chỉnh sửa thông tin", style: textHeaderScreen),
     iconTheme: IconThemeData(
       color: mobileBackgroundColor, //change your color here
     ),
