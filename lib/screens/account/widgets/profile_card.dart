@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:winpe_pay/providers/user_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:winpe_pay/resources/auth_methods.dart';
 import 'package:winpe_pay/resources/firestore_methods.dart';
 import 'package:winpe_pay/screens/account/edit_profile.dart';
 import 'package:winpe_pay/screens/login/widgets/styles.dart';
@@ -21,7 +22,16 @@ class ProfileCard extends StatefulWidget {
 
 class _ProfileCardState extends State<ProfileCard> {
   final FireStoreMethods fireStoreMethods = FireStoreMethods();
+  final AuthMethods authMethods = AuthMethods();
   Uint8List? _image;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    authMethods.getUserDetails(context);
+    super.initState();
+  }
+
   selectImage() async {
     Uint8List im = await pickImage(ImageSource.gallery);
     showDiaLog(context);
@@ -43,7 +53,6 @@ class _ProfileCardState extends State<ProfileCard> {
   @override
   Widget build(BuildContext context) {
     final uid = context.watch<UserProvider>().user;
-    print("??? ${_image}");
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25, horizontal: 15),
       child: Column(
@@ -103,7 +112,9 @@ class _ProfileCardState extends State<ProfileCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Họ và tên:  \nThêm họ và tên",
+                '${uid?.username}'.isNotEmpty
+                    ? 'Họ và tên: \n${uid?.username}'
+                    : 'Họ và tên: \nThêm họ và tên',
                 style: textStandard,
               ),
               IconButton(
