@@ -26,16 +26,21 @@ class GlobalVariables {
     },
     {
       'id': '2',
+      'title': 'Thẻ Winpe Pay',
+      'image': 'assets/images/arctic-fox.jpg',
+    },
+    {
+      'id': '3',
       'title': 'Lịch sử giao dịch',
       'image': 'assets/images/clock.png',
     },
     {
-      'id': '3',
+      'id': '4',
       'title': 'Thông báo',
       'image': 'assets/images/bell.png',
     },
     {
-      'id': '4',
+      'id': '5',
       'title': 'Ưu đãi của tôi',
       'image': 'assets/images/hot-sale.png',
     },
@@ -43,7 +48,7 @@ class GlobalVariables {
 
   String avatarProfile = "https://i.stack.imgur.com/l60Hf.png";
 
-  String loadingLottie = "https://assets4.lottiefiles.com/packages/lf20_gbfwtkzw.json";
+  String loadingLottie = "https://assets6.lottiefiles.com/packages/lf20_lb3jx6jr.json";
 
   String? accountNo() {
     final length = 13;
@@ -74,4 +79,22 @@ class GlobalVariables {
       return chars[indexRandom];
     }).join('');
   }
+
+  static const List<Map<String, String>> reasonuseWinpeCard = [
+    {
+      'id': '1',
+      'title': 'Miễn phí rút tiền ATM',
+      'image': 'assets/images/arctic-fox.jpg',
+    },
+    {
+      'id': '2',
+      'title': 'Miễn phí thanh toán tại quầy qua POS',
+      'image': 'assets/images/arctic-fox.jpg',
+    },
+    {
+      'id': '3',
+      'title': 'Miễn phí phát hành',
+      'image': 'assets/images/arctic-fox.jpg',
+    },
+  ];
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:winpe_pay/screens/account/edit_profile.dart';
 import 'package:winpe_pay/screens/account/profile_screen.dart';
+import 'package:winpe_pay/screens/card/winpe_card_screen.dart';
 import 'package:winpe_pay/screens/login/login_screen.dart';
 import 'package:winpe_pay/screens/login/otp_screen.dart';
 import 'package:winpe_pay/widgets/bottom_bar.dart';
@@ -34,6 +35,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const EditProfile(),
+      );
+    case WinpeCardScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const WinpeCardScreen(),
       );
     default:
       return MaterialPageRoute(
