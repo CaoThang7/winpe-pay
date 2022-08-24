@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:winpe_pay/screens/account/profile_screen.dart';
 import 'package:winpe_pay/screens/account/widgets/app_bars.dart';
 import 'package:winpe_pay/screens/account/widgets/setting_card.dart';
+import 'package:winpe_pay/screens/card/winpe_card_screen.dart';
 import 'package:winpe_pay/utils/global_variable.dart';
 import 'package:winpe_pay/widgets/loader.dart';
 
@@ -36,10 +37,12 @@ class _AccountScreenState extends State<AccountScreen> {
     if (dataSettingsUser == '1') {
       Navigator.pushNamed(context, ProfileScreen.routeName);
     } else if (dataSettingsUser == '2') {
-      print("Transaction history");
+      Navigator.pushNamed(context, WinpeCardScreen.routeName);
     } else if (dataSettingsUser == '3') {
-      print("notification");
+      print("Transaction history");
     } else if (dataSettingsUser == '4') {
+      print("notification");
+    } else if (dataSettingsUser == '5') {
       print("sale");
     }
   }
