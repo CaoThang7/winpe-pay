@@ -45,12 +45,55 @@ TextStyle get textHeaderScreen {
   );
 }
 
+TextStyle get textStandardBold{
+  return (
+    TextStyle(
+      fontSize: 16,
+      fontFamily: 'Roboto',
+      color: primaryColor,
+      fontWeight: FontWeight.bold,
+    )
+  );
+}
+
 TextStyle get textStandard{
   return (
     TextStyle(
       fontSize: 16,
       fontFamily: 'Roboto',
       color: primaryColor
+    )
+  );
+}
+
+TextStyle get textNameCard {
+  return (
+    TextStyle(
+      fontSize: 20,
+      fontFamily: 'Roboto',
+      color: Colors.white
+    )
+  );
+}
+
+TextStyle get textValidFrom{
+  return (
+    TextStyle(
+      fontSize: 12,
+      fontFamily: 'Arsenal',
+       color: Colors.white
+    )
+  );
+}
+
+TextStyle get textNameNapas {
+  return (
+    TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Arsenal-Bold',
+      fontStyle: FontStyle.italic,
+      color: Colors.white
     )
   );
 }
