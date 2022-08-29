@@ -30,7 +30,7 @@ class _CardWinpeState extends State<CardWinpe> {
                   color: primaryColor,
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
-                      image: AssetImage('assets/images/technology.jpg'),
+                      image: GlobalVariables.imageCard,
                       fit: BoxFit.fill,
                       opacity: 0.3)),
               child: Column(
@@ -41,11 +41,7 @@ class _CardWinpeState extends State<CardWinpe> {
                     children: [
                       Row(
                         children: [
-                          Image.asset(
-                            "assets/images/arctic-fox.jpg",
-                            height: 35,
-                            width: 35,
-                          ),
+                          GlobalVariables.logoAppSmall,
                           SizedBox(
                             width: 10,
                           ),
@@ -55,11 +51,7 @@ class _CardWinpeState extends State<CardWinpe> {
                           )
                         ],
                       ),
-                      Image.asset(
-                        "assets/images/mastercard.png",
-                        height: 35,
-                        width: 35,
-                      ),
+                      GlobalVariables.logoMasterCard
                     ],
                   ),
                   SizedBox(

@@ -9,15 +9,20 @@ class User {
   final String? accNo;
   final String? ifscCode;
   final String? username;
-  const User(
-      {required this.phone,
-      required this.uid,
-      required this.dateCreated,
-      required this.dateSignedIn,
-      required this.photoUrl,
-      required this.accNo,
-      required this.ifscCode,
-      required this.username});
+  final String? money;
+  final String? diamond;
+  const User({
+    required this.phone,
+    required this.uid,
+    required this.dateCreated,
+    required this.dateSignedIn,
+    required this.photoUrl,
+    required this.accNo,
+    required this.ifscCode,
+    required this.username,
+    required this.money,
+    required this.diamond,
+  });
 
   static User fromJson(Map<String, dynamic> json) => User(
       phone: json["phone"],
@@ -27,7 +32,9 @@ class User {
       photoUrl: json["photoUrl"],
       accNo: json["accNo"],
       ifscCode: json["ifscCode"],
-      username: json["username"]);
+      username: json["username"],
+      money: json["money"],
+      diamond: json["diamond"]);
 
   Map<String, dynamic> toJson() => {
         "phone": phone,
@@ -37,6 +44,8 @@ class User {
         "photoUrl": photoUrl,
         "accNo": accNo,
         "ifscCode": ifscCode,
-        "username": username
+        "username": username,
+        "money": money,
+        "diamond": diamond,
       };
 }
