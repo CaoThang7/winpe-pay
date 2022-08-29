@@ -82,14 +82,17 @@ class AuthMethods {
       await _auth.signInWithCredential(credential).then((value) async {
         final User user = _auth.currentUser!;
         model.User _user = model.User(
-            phone: user.phoneNumber.toString(),
-            uid: user.uid,
-            dateCreated: user.metadata.creationTime,
-            dateSignedIn: DateTime.now(),
-            photoUrl: "",
-            accNo: accNo,
-            ifscCode: ifscCode,
-            username: "");
+          phone: user.phoneNumber.toString(),
+          uid: user.uid,
+          dateCreated: user.metadata.creationTime,
+          dateSignedIn: DateTime.now(),
+          photoUrl: "",
+          accNo: accNo,
+          ifscCode: ifscCode,
+          username: "",
+          money: "",
+          diamond: "",
+        );
         // adding user in our database
         await _firestore.collection("users").doc(user.uid).set(_user.toJson());
         showSnackBar(context, 'Bạn đã đăng nhập thành công');
