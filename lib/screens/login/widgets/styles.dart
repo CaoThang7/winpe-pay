@@ -97,3 +97,47 @@ TextStyle get textNameNapas {
     )
   );
 }
+
+TextStyle get textFullNameHome{
+  return (
+    TextStyle(
+      fontSize: 16,
+      fontFamily: 'Arsenal',
+      color: Colors.white,
+      fontWeight: FontWeight.bold
+    )
+  );
+}
+
+TextStyle get textTitleHome{
+  return (
+    TextStyle(
+      fontSize: 16,
+      fontFamily: 'Roboto',
+      color: Colors.white,
+      fontWeight: FontWeight.bold
+    )
+  );
+}
+
+TextStyle get textIconTitleHome{
+  return (
+    TextStyle(
+      fontSize: 12,
+      fontFamily: 'Roboto',
+      color: Colors.white,
+      fontWeight: FontWeight.bold
+    )
+  );
+}
+
+TextStyle get textTitleMenuHome{
+  return (
+    TextStyle(
+      fontSize: 15,
+      fontFamily: 'Arsenal',
+      color: primaryColor,
+      fontWeight: FontWeight.bold,
+    )
+  );
+}
