@@ -39,3 +39,18 @@ showDiaLog(BuildContext context) {
     },
   );
 }
+
+showDiaLogPayment(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      Future.delayed(
+        Duration(seconds: 5),
+        () {
+          Navigator.of(context).pop(true);
+        },
+      );
+      return Loader();
+    },
+  );
+}

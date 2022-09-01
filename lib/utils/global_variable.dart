@@ -69,6 +69,11 @@ class GlobalVariables {
       'title': 'Ưu đãi của tôi',
       'image': 'assets/images/hot-sale.png',
     },
+    {
+      'id': '6',
+      'title': 'Đăng xuất',
+      'image': 'assets/images/logout.png',
+    },
   ];
 
   static const List<Map<String, String>> reasonuseWinpeCard = [
