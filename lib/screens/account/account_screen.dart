@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:winpe_pay/resources/auth_methods.dart';
 import 'package:winpe_pay/screens/account/profile_screen.dart';
 import 'package:winpe_pay/screens/account/widgets/app_bars.dart';
 import 'package:winpe_pay/screens/account/widgets/setting_card.dart';
@@ -15,6 +16,7 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   bool _isLoading = false;
+  AuthMethods authMethods = AuthMethods();
   @override
   void initState() {
     // TODO: implement initState
@@ -33,6 +35,10 @@ class _AccountScreenState extends State<AccountScreen> {
     });
   }
 
+  void logout() {
+    authMethods.signOut();
+  }
+
   void navigateSetting(var dataSettingsUser) {
     if (dataSettingsUser == '1') {
       Navigator.pushNamed(context, ProfileScreen.routeName);
@@ -44,6 +50,8 @@ class _AccountScreenState extends State<AccountScreen> {
       print("notification");
     } else if (dataSettingsUser == '5') {
       print("sale");
+    } else if (dataSettingsUser == '6') {
+      logout();
     }
   }
 

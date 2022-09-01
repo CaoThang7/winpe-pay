@@ -141,3 +141,14 @@ TextStyle get textTitleMenuHome{
     )
   );
 }
+
+TextStyle get textTitlePayment{
+  return (
+    TextStyle(
+      fontSize: 18,
+      fontFamily: 'Arsenal-Bold',
+      color: primaryColor,
+      fontWeight: FontWeight.bold,
+    )
+  );
+}
