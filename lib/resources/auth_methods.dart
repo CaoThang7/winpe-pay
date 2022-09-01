@@ -90,8 +90,8 @@ class AuthMethods {
           accNo: accNo,
           ifscCode: ifscCode,
           username: "",
-          money: "",
-          diamond: "",
+          money: 0,
+          diamond: 0,
         );
         // adding user in our database
         await _firestore.collection("users").doc(user.uid).set(_user.toJson());
@@ -127,5 +127,10 @@ class AuthMethods {
     } catch (e) {
       print("co gi do sai sai");
     }
+  }
+
+  // sign out
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 }

@@ -6,6 +6,8 @@ import 'package:winpe_pay/resources/storage_methods.dart';
 import 'package:winpe_pay/screens/account/profile_screen.dart';
 import 'package:winpe_pay/utils/utils.dart';
 import 'dart:async';
+import 'package:winpe_pay/models/transfer_content.dart' as model;
+import 'package:uuid/uuid.dart';
 
 class FireStoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -19,7 +21,8 @@ class FireStoreMethods {
     try {
       if (file != null) {
         //save image to storage firebase
-        String photoUrl = await StorageMethods().uploadImageToStorage('profilePics', file);
+        String photoUrl =
+            await StorageMethods().uploadImageToStorage('profilePics', file);
         final User user = _auth.currentUser!;
 
         //update image url to Firestore firebase (table users)
@@ -75,6 +78,48 @@ class FireStoreMethods {
       Timer(Duration(seconds: 2), () {
         Navigator.pushNamed(context, ProfileScreen.routeName);
       });
+    } catch (err) {}
+  }
+
+  Future<void> transfer({
+    required String uidSender,
+    required String uidreceiver,
+    required String money,
+    required String content,
+    required String account_money,
+    required int moneyReceiver,
+    required BuildContext context,
+  }) async {
+    String transferContentId = const Uuid().v1();
+    try {
+      model.TransferContent transferContent = model.TransferContent(
+        uid: transferContentId,
+        uidSender: uidSender,
+        uidreceiver: uidreceiver,
+        money: int.parse(money),
+        content: content,
+        time: DateTime.now(),
+      );
+
+      //create table database transfer in firestore
+      await _firestore
+          .collection("transfer")
+          .doc(transferContentId)
+          .set(transferContent.toJson());
+
+      //update money user sender
+      await _firestore
+          .collection('users')
+          .doc(uidSender)
+          .update({"money": int.parse(account_money) - int.parse(money)});
+
+      //update money user receiver
+      await _firestore
+          .collection('users')
+          .doc(uidreceiver)
+          .update({"money": moneyReceiver + int.parse(money)});
+
+      showDiaLogPayment(context);
     } catch (err) {}
   }
 }

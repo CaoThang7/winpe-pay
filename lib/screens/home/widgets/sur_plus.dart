@@ -67,8 +67,8 @@ class _SurPlusState extends State<SurPlus> {
                     ],
                   ),
                   Text(
-                      '${uid?.money}'.isNotEmpty
-                          ? '${uid?.money.toVND()}'
+                      '${uid?.money.toString()}'.isNotEmpty
+                          ? '${uid?.money.toString().toVND()}'
                           : '0 đ',
                       style: textStandard)
                 ],
@@ -91,7 +91,10 @@ class _SurPlusState extends State<SurPlus> {
                       ),
                     ],
                   ),
-                  Text('${uid?.diamond}'.isNotEmpty ? '${uid?.diamond}' : '0',
+                  Text(
+                      '${uid?.diamond.toString()}'.isNotEmpty
+                          ? '${uid?.diamond.toString()}'
+                          : '0',
                       style: textStandard)
                 ],
               ),

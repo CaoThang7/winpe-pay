@@ -5,12 +5,12 @@ class User {
   final String? uid;
   final DateTime? dateCreated;
   final DateTime? dateSignedIn;
-  final String photoUrl;
+  final String? photoUrl;
   final String? accNo;
   final String? ifscCode;
   final String? username;
-  final String? money;
-  final String? diamond;
+  final int? money;
+  final int? diamond;
   const User({
     required this.phone,
     required this.uid,
