@@ -8,11 +8,12 @@ import 'package:winpe_pay/utils/utils.dart';
 import 'dart:async';
 import 'package:winpe_pay/models/transfer_content.dart' as model;
 import 'package:uuid/uuid.dart';
+import 'package:winpe_pay/resources/message_methods.dart';
 
 class FireStoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  final MessageMethods messageMethods = MessageMethods();
   Future<String> uploadImage({
     required Uint8List file,
     required BuildContext context,
@@ -120,6 +121,14 @@ class FireStoreMethods {
           .update({"money": moneyReceiver + int.parse(money)});
 
       showDiaLogPayment(context);
+
+      Timer(Duration(seconds: 7), () {
+        messageMethods.showNotification(
+          title: 'Chuyển tiền thành công',
+          body: 'Cảm ơn quý khách đã sử dụng dịch vụ Winpe Pay',
+          payload: "Giao dịch thành công!",
+        );
+      });
     } catch (err) {}
   }
 }
