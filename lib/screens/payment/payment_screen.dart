@@ -67,6 +67,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     }
   }
 
+  //transfer
   void transfer(
       String? uidSender, String? account_money, int? moneyReceiver) async {
     if (globalkey.currentState!.validate()) {
