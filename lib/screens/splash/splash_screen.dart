@@ -10,6 +10,7 @@ import 'package:winpe_pay/widgets/loader.dart';
 import '../../utils/global_variable.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const String routeName = '/splash-screen';
   const SplashScreen({Key? key}) : super(key: key);
 
   @override

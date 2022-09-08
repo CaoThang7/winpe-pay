@@ -5,11 +5,19 @@ import 'package:winpe_pay/screens/card/winpe_card_screen.dart';
 import 'package:winpe_pay/screens/login/login_screen.dart';
 import 'package:winpe_pay/screens/login/otp_screen.dart';
 import 'package:winpe_pay/screens/payment/payment_screen.dart';
+import 'package:winpe_pay/screens/payment/payment_success.dart';
+import 'package:winpe_pay/screens/splash/splash_screen.dart';
 import 'package:winpe_pay/screens/support/support_screen.dart';
+import 'package:winpe_pay/screens/transaction/transaction_screen.dart';
 import 'package:winpe_pay/widgets/bottom_bar.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
+    case SplashScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const SplashScreen(),
+      );
     case LoginScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
@@ -52,6 +60,16 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const SupportScreen(),
+      );
+    case TransactionHistoryScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const TransactionHistoryScreen(),
+      );
+    case PaymentSuccess.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const PaymentSuccess(),
       );
     default:
       return MaterialPageRoute(
