@@ -152,3 +152,14 @@ TextStyle get textTitlePayment{
     )
   );
 }
+
+TextStyle get textPaymentSuccess{
+  return (
+    TextStyle(
+      fontSize: 22,
+      fontFamily: 'Arsenal-Bold',
+      color: primaryColor,
+      fontWeight: FontWeight.bold,
+    )
+  );
+}
