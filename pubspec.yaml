@@ -40,11 +40,13 @@ dependencies:
   flutter_format_money_vietnam: ^0.0.2
   flutter_local_notifications: ^9.9.0
   flutter_svg: ^1.1.3
+  flutter_verification_code: ^1.1.3+1
   google_fonts: ^3.0.1
   image_picker: ^0.8.5+3
   lottie: ^1.4.1
   provider: ^6.0.3
   rxdart: ^0.27.5
+  shared_preferences: ^2.0.15
   smooth_page_indicator: ^1.0.0+2
   translator: ^0.1.7
   uuid: ^3.0.5

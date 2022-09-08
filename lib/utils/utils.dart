@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:winpe_pay/screens/payment/payment_success.dart';
 import 'package:winpe_pay/utils/colors.dart';
 import 'package:winpe_pay/widgets/loader.dart';
 
@@ -47,7 +48,11 @@ showDiaLogPayment(BuildContext context) {
       Future.delayed(
         Duration(seconds: 5),
         () {
-          Navigator.of(context).pop(true);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            PaymentSuccess.routeName,
+            (route) => false,
+          );
         },
       );
       return Loader();

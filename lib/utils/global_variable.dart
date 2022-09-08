@@ -36,6 +36,8 @@ class GlobalVariables {
 
   String loadingLottie = "https://assets6.lottiefiles.com/packages/lf20_lb3jx6jr.json";
 
+  String paymentSuccess = "https://assets5.lottiefiles.com/private_files/lf30_qr37agb3.json";
+
   static const List<String> carouselImages = [
     'https://designercomvn.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2017/08/26020137/nhan-thiet-ke-banner-trung-thu-gia-re-thu-hut-khach-hang8.jpg',
     'https://genk.mediacdn.vn/zoom/700_438/139269124445442048/2021/1/22/photo1611286986146-16112869863391829588950.png',
@@ -192,6 +194,20 @@ class GlobalVariables {
 
     String chars = '';
     chars += '$lettersLowercase$lettersUppercase$numbers';
+
+    return List.generate(length, (index) {
+      final indexRandom = Random.secure().nextInt(chars.length);
+
+      return chars[indexRandom];
+    }).join('');
+  }
+
+  String? verifiCode() {
+    final length = 6;
+    final numbers = '0123456789';
+
+    String chars = '';
+    chars += '$numbers';
 
     return List.generate(length, (index) {
       final indexRandom = Random.secure().nextInt(chars.length);

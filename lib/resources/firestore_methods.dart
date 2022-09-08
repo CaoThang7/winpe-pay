@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:winpe_pay/resources/storage_methods.dart';
 import 'package:winpe_pay/screens/account/profile_screen.dart';
 import 'package:winpe_pay/utils/utils.dart';
@@ -9,6 +10,7 @@ import 'dart:async';
 import 'package:winpe_pay/models/transfer_content.dart' as model;
 import 'package:uuid/uuid.dart';
 import 'package:winpe_pay/resources/message_methods.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FireStoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -92,15 +94,45 @@ class FireStoreMethods {
     required BuildContext context,
   }) async {
     String transferContentId = const Uuid().v1();
+    var usernameSender;
+    var usernamereceiver;
     try {
+      //get data user uidSender
+      var userSender = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uidSender)
+          .get();
+
+      //get data user uidreceiver
+      var userReceiver = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uidreceiver)
+          .get();
+
+      usernameSender = userSender['username'];
+      usernamereceiver = userReceiver['username'];
+
       model.TransferContent transferContent = model.TransferContent(
-        uid: transferContentId,
-        uidSender: uidSender,
-        uidreceiver: uidreceiver,
-        money: int.parse(money),
-        content: content,
-        time: DateTime.now(),
-      );
+          uid: transferContentId,
+          uidSender: uidSender,
+          uidreceiver: uidreceiver,
+          time: DateTime.now(),
+          transferItems: [
+            {
+              "uidSender": uidSender,
+              "money": -int.parse(money),
+              "content": content,
+              "dateCreated": DateTime.now(),
+              "username": usernamereceiver
+            },
+            {
+              "uidreceiver": uidreceiver,
+              "money": int.parse(money),
+              "content": content,
+              "dateCreated": DateTime.now(),
+              "username": usernameSender
+            },
+          ]);
 
       //create table database transfer in firestore
       await _firestore
@@ -130,5 +162,33 @@ class FireStoreMethods {
         );
       });
     } catch (err) {}
+  }
+
+  //check data Transaction history with id users
+  // check id sender and id uidreceiver
+  // if id sender and id uidreceiver == id when login (show Transaction History)
+  Future<String> checkDataTransaction({
+    required BuildContext context,
+  }) async {
+    String res = "Some error Occurred";
+    try {
+      String uidSender = '';
+      String uidreceiver = '';
+      var listTransaction =
+          await FirebaseFirestore.instance.collection('transfer').get();
+
+      for (int i = 0; i < listTransaction.docs.length; i++) {
+        uidSender = listTransaction.docs[i]['uidSender'];
+        uidreceiver = listTransaction.docs[i]['uidreceiver'];
+      }
+
+      if (uidSender == FirebaseAuth.instance.currentUser!.uid ||
+          uidreceiver == FirebaseAuth.instance.currentUser!.uid) {
+        res = "success";
+      } else {
+        res = "faild";
+      }
+    } catch (err) {}
+    return res;
   }
 }

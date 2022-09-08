@@ -50,7 +50,7 @@ SliverAppBar SliverAppBarCustom(User? uid, VoidCallback? press, bool visible) {
                   Text(
                     '${uid?.username}'.isNotEmpty
                         ? '${uid?.username}'
-                        : 'No name',
+                        : 'Tên tài khoản',
                     style: textFullNameHome,
                   ),
                   SizedBox(

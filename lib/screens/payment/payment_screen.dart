@@ -4,6 +4,7 @@ import 'package:winpe_pay/providers/user_provider.dart';
 import 'package:winpe_pay/resources/firestore_methods.dart';
 import 'package:winpe_pay/screens/login/widgets/styles.dart';
 import 'package:winpe_pay/screens/payment/widgets/app_bars.dart';
+import 'package:winpe_pay/screens/payment/widgets/bottom_sheet.dart';
 import 'package:winpe_pay/screens/payment/widgets/text_form_payment.dart';
 import 'package:winpe_pay/screens/payment/widgets/validate.dart';
 import 'package:winpe_pay/utils/colors.dart';
@@ -32,6 +33,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
   String username = '';
   int moneyUser = 0;
   final globalkey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _usernameController.dispose();
+    _stkController.dispose();
+    _moneyController.dispose();
+    _contentController.dispose();
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -71,14 +83,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void transfer(
       String? uidSender, String? account_money, int? moneyReceiver) async {
     if (globalkey.currentState!.validate()) {
-      fireStoreMethods.transfer(
+      showModalBottomSheet(
+          isScrollControlled: true,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
           context: context,
-          uidSender: uidSender!,
-          uidreceiver: uidUser,
-          money: _moneyController.text,
-          content: _contentController.text,
-          account_money: account_money!,
-          moneyReceiver: moneyReceiver!);
+          builder: (context) {
+            return CustomBottomSheet(
+                uidSender: uidSender!,
+                uidreceiver: uidUser,
+                money: _moneyController.text,
+                content: _contentController.text,
+                account_money: account_money!,
+                moneyReceiver: moneyReceiver!);
+          });
     }
   }
 
@@ -129,6 +147,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   text: 'Tiếp tục',
                   onTap: () {
                     transfer(uid?.uid, uid?.money.toString(), moneyUser);
+                    // showBottomSheet();
                   },
                 ),
               ],

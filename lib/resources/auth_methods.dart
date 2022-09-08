@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:winpe_pay/providers/user_provider.dart';
+import 'package:winpe_pay/screens/login/login_screen.dart';
 import 'package:winpe_pay/screens/login/otp_screen.dart';
+import 'package:winpe_pay/screens/splash/splash_screen.dart';
 import 'package:winpe_pay/utils/utils.dart';
 import 'package:translator/translator.dart';
 import 'dart:async';
@@ -67,8 +69,13 @@ class AuthMethods {
   }
 
   // verifyOTP
-  Future<void> verifyOTP(BuildContext context, String otp, String verifiId,
-      String accNo, String ifscCode) async {
+  Future<void> verifyOTP(
+    BuildContext context,
+    String otp,
+    String verifiId,
+    String accNo,
+    String ifscCode,
+  ) async {
     try {
       if (otp.isEmpty) {
         showSnackBar(context, "OTP không được bỏ trống");
@@ -81,6 +88,16 @@ class AuthMethods {
       // !!! Works only on Android, iOS !!!
       await _auth.signInWithCredential(credential).then((value) async {
         final User user = _auth.currentUser!;
+
+        var userSnap = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .get();
+
+        var userData = userSnap.data()!;
+        String username = userSnap.data()!['username'];
+        int money = userSnap.data()!['money'];
+        int diamond = userSnap.data()!['diamond'];
         model.User _user = model.User(
           phone: user.phoneNumber.toString(),
           uid: user.uid,
@@ -89,9 +106,9 @@ class AuthMethods {
           photoUrl: "",
           accNo: accNo,
           ifscCode: ifscCode,
-          username: "",
-          money: 0,
-          diamond: 0,
+          username: username,
+          money: money,
+          diamond: diamond,
         );
         // adding user in our database
         await _firestore.collection("users").doc(user.uid).set(_user.toJson());
@@ -130,7 +147,14 @@ class AuthMethods {
   }
 
   // sign out
-  Future<void> signOut() async {
+  Future<void> signOut(
+    BuildContext context,
+  ) async {
     await _auth.signOut();
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      SplashScreen.routeName,
+      (route) => false,
+    );
   }
 }

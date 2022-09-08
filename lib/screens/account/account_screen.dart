@@ -4,6 +4,7 @@ import 'package:winpe_pay/screens/account/profile_screen.dart';
 import 'package:winpe_pay/screens/account/widgets/app_bars.dart';
 import 'package:winpe_pay/screens/account/widgets/setting_card.dart';
 import 'package:winpe_pay/screens/card/winpe_card_screen.dart';
+import 'package:winpe_pay/screens/transaction/transaction_screen.dart';
 import 'package:winpe_pay/utils/global_variable.dart';
 import 'package:winpe_pay/widgets/loader.dart';
 
@@ -36,7 +37,7 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   void logout() {
-    authMethods.signOut();
+    authMethods.signOut(context);
   }
 
   void navigateSetting(var dataSettingsUser) {
@@ -45,7 +46,7 @@ class _AccountScreenState extends State<AccountScreen> {
     } else if (dataSettingsUser == '2') {
       Navigator.pushNamed(context, WinpeCardScreen.routeName);
     } else if (dataSettingsUser == '3') {
-      print("Transaction history");
+      Navigator.pushNamed(context, TransactionHistoryScreen.routeName);
     } else if (dataSettingsUser == '4') {
       print("notification");
     } else if (dataSettingsUser == '5') {
