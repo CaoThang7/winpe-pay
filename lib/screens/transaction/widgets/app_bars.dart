@@ -14,3 +14,16 @@ AppBar AppBarTransactionHistory(BuildContext context) {
     ),
   );
 }
+
+AppBar AppBarTransactionDetail(BuildContext context) {
+  return AppBar(
+    flexibleSpace: Container(
+      color: primaryColor,
+    ),
+    centerTitle: true,
+    title: Text("Chi tiết giao dịch", style: textNameCard),
+    iconTheme: IconThemeData(
+      color: mobileBackgroundColor, //change your color here
+    ),
+  );
+}

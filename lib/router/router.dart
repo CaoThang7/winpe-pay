@@ -8,6 +8,7 @@ import 'package:winpe_pay/screens/payment/payment_screen.dart';
 import 'package:winpe_pay/screens/payment/payment_success.dart';
 import 'package:winpe_pay/screens/splash/splash_screen.dart';
 import 'package:winpe_pay/screens/support/support_screen.dart';
+import 'package:winpe_pay/screens/transaction/transaction_detail.dart';
 import 'package:winpe_pay/screens/transaction/transaction_screen.dart';
 import 'package:winpe_pay/widgets/bottom_bar.dart';
 
@@ -70,6 +71,14 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const PaymentSuccess(),
+      );
+    case TransactionDetail.routeName:
+      var dataTransaction = routeSettings.arguments;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => TransactionDetail(
+          dataTransaction: dataTransaction,
+        ),
       );
     default:
       return MaterialPageRoute(
