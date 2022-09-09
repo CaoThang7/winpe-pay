@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:winpe_pay/resources/firestore_methods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:winpe_pay/screens/transaction/transaction_detail.dart';
 import 'package:winpe_pay/screens/transaction/widgets/app_bars.dart';
 import 'package:winpe_pay/screens/transaction/widgets/data_empty.dart';
 import 'package:winpe_pay/screens/transaction/widgets/transaction_card.dart';
@@ -87,12 +88,20 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
               width: MediaQuery.of(context).size.width,
               child: vis
                   ? ListView.builder(
-                      // physics: NeverScrollableScrollPhysics(),
                       itemCount: result!.length,
                       itemBuilder: (BuildContext context, int index) {
                         var data = result![index];
-                        return TransactionCard(
-                          data: data,
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              TransactionDetail.routeName,
+                              arguments: data,
+                            );
+                          },
+                          child: TransactionCard(
+                            data: data,
+                          ),
                         );
                       })
                   : DataEmpty()),

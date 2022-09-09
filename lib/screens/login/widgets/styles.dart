@@ -163,3 +163,24 @@ TextStyle get textPaymentSuccess{
     )
   );
 }
+
+TextStyle get textPaymentDetail {
+  return (
+    TextStyle(
+      fontSize: 16,
+      fontFamily: 'Roboto',
+      color: secondaryColor
+    )
+  );
+}
+
+TextStyle get textStandardBlack{
+  return (
+    TextStyle(
+      fontSize: 16,
+      fontFamily: 'Roboto',
+      color: Colors.black,
+    )
+  );
+}
+

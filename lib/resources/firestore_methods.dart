@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:winpe_pay/resources/storage_methods.dart';
 import 'package:winpe_pay/screens/account/profile_screen.dart';
+import 'package:winpe_pay/utils/global_variable.dart';
 import 'package:winpe_pay/utils/utils.dart';
 import 'dart:async';
 import 'package:winpe_pay/models/transfer_content.dart' as model;
@@ -123,14 +124,16 @@ class FireStoreMethods {
               "money": -int.parse(money),
               "content": content,
               "dateCreated": DateTime.now(),
-              "username": usernamereceiver
+              "username": usernamereceiver,
+              "code": GlobalVariables().accountNo()
             },
             {
               "uidreceiver": uidreceiver,
               "money": int.parse(money),
               "content": content,
               "dateCreated": DateTime.now(),
-              "username": usernameSender
+              "username": usernameSender,
+              "code": GlobalVariables().accountNo()
             },
           ]);
 
