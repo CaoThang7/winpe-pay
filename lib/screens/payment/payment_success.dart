@@ -17,50 +17,53 @@ class _PaymentSuccessState extends State<PaymentSuccess> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      padding: EdgeInsets.symmetric(vertical: 70),
-      child: Column(
-        children: [
-          Lottie.network(
-            GlobalVariables().paymentSuccess,
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Text(
-            "Giao dịch thành công",
-            style: textPaymentSuccess,
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            "Cảm ơn quý khách đã sử dụng dịch vụ Winpe Pay",
-            style: textStandard,
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                BottomBar.routeName,
-                (route) => false,
-              );
-            },
-            child: Icon(
-              Icons.arrow_forward_ios,
-              color: mobileBackgroundColor,
+      backgroundColor: mobileBackgroundColor,
+      body: Container(
+        padding: EdgeInsets.symmetric(vertical: 100),
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            Lottie.network(
+              GlobalVariables().paymentSuccess,
             ),
-            style: ElevatedButton.styleFrom(
-              primary: primaryColor,
-              shape: CircleBorder(),
-              padding: EdgeInsets.all(18),
+            SizedBox(
+              height: 15,
             ),
-          )
-        ],
+            Text(
+              "Giao dịch thành công",
+              style: textPaymentSuccess,
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              "Cảm ơn quý khách đã sử dụng dịch vụ Winpe Pay",
+              style: textStandard,
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  BottomBar.routeName,
+                  (route) => false,
+                );
+              },
+              child: Icon(
+                Icons.arrow_forward_ios,
+                color: mobileBackgroundColor,
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: primaryColor,
+                shape: CircleBorder(),
+                padding: EdgeInsets.all(18),
+              ),
+            )
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

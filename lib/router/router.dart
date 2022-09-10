@@ -4,6 +4,7 @@ import 'package:winpe_pay/screens/account/profile_screen.dart';
 import 'package:winpe_pay/screens/card/winpe_card_screen.dart';
 import 'package:winpe_pay/screens/login/login_screen.dart';
 import 'package:winpe_pay/screens/login/otp_screen.dart';
+import 'package:winpe_pay/screens/notification/notification_screen.dart';
 import 'package:winpe_pay/screens/payment/payment_screen.dart';
 import 'package:winpe_pay/screens/payment/payment_success.dart';
 import 'package:winpe_pay/screens/splash/splash_screen.dart';
@@ -79,6 +80,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         builder: (_) => TransactionDetail(
           dataTransaction: dataTransaction,
         ),
+      );
+    case NotificationScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const NotificationScreen(),
       );
     default:
       return MaterialPageRoute(

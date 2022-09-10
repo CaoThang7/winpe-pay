@@ -9,9 +9,14 @@ AppBar AppBarTransactionHistory(BuildContext context) {
     ),
     centerTitle: true,
     title: Text("Lịch sử giao dịch", style: textNameCard),
-    iconTheme: IconThemeData(
-      color: mobileBackgroundColor, //change your color here
-    ),
+    leading: IconButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        icon: Icon(
+          Icons.arrow_back,
+          color: mobileBackgroundColor,
+        )),
   );
 }
 
@@ -22,8 +27,13 @@ AppBar AppBarTransactionDetail(BuildContext context) {
     ),
     centerTitle: true,
     title: Text("Chi tiết giao dịch", style: textNameCard),
-    iconTheme: IconThemeData(
-      color: mobileBackgroundColor, //change your color here
-    ),
+    leading: IconButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        icon: Icon(
+          Icons.arrow_back,
+          color: mobileBackgroundColor,
+        )),
   );
 }
