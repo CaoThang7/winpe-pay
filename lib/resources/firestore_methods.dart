@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:winpe_pay/models/notification.dart' as model;
 import 'package:winpe_pay/resources/storage_methods.dart';
 import 'package:winpe_pay/screens/account/profile_screen.dart';
 import 'package:winpe_pay/utils/global_variable.dart';
@@ -95,6 +96,7 @@ class FireStoreMethods {
     required BuildContext context,
   }) async {
     String transferContentId = const Uuid().v1();
+    String notificationId = const Uuid().v1();
     var usernameSender;
     var usernamereceiver;
     try {
@@ -137,11 +139,39 @@ class FireStoreMethods {
             },
           ]);
 
+      model.Notification notification = model.Notification(
+          uid: notificationId,
+          uidSender: uidSender,
+          uidreceiver: uidreceiver,
+          dateCreated: DateTime.now(),
+          notificaItems: [
+            {
+              "uidSender": uidSender,
+              "money": -int.parse(money),
+              "content": content,
+              "dateCreated": DateTime.now(),
+              "username": usernamereceiver,
+            },
+            {
+              "uidreceiver": uidreceiver,
+              "money": int.parse(money),
+              "content": content,
+              "dateCreated": DateTime.now(),
+              "username": usernameSender,
+            },
+          ]);
+
       //create table database transfer in firestore
       await _firestore
           .collection("transfer")
           .doc(transferContentId)
           .set(transferContent.toJson());
+
+      //create table database notification in firestore
+      await _firestore
+          .collection("notifications")
+          .doc(notificationId)
+          .set(notification.toJson());
 
       //update money user sender
       await _firestore
@@ -168,8 +198,6 @@ class FireStoreMethods {
   }
 
   //check data Transaction history with id users
-  // check id sender and id uidreceiver
-  // if id sender and id uidreceiver == id when login (show Transaction History)
   Future<String> checkDataTransaction({
     required BuildContext context,
   }) async {
@@ -183,6 +211,32 @@ class FireStoreMethods {
       for (int i = 0; i < listTransaction.docs.length; i++) {
         uidSender = listTransaction.docs[i]['uidSender'];
         uidreceiver = listTransaction.docs[i]['uidreceiver'];
+      }
+
+      if (uidSender == FirebaseAuth.instance.currentUser!.uid ||
+          uidreceiver == FirebaseAuth.instance.currentUser!.uid) {
+        res = "success";
+      } else {
+        res = "faild";
+      }
+    } catch (err) {}
+    return res;
+  }
+
+  //check data Notificationhistory with id users
+  Future<String> checkDataNotification({
+    required BuildContext context,
+  }) async {
+    String res = "Some error Occurred";
+    try {
+      String uidSender = '';
+      String uidreceiver = '';
+      var listNotification =
+          await FirebaseFirestore.instance.collection('notifications').get();
+
+      for (int i = 0; i < listNotification.docs.length; i++) {
+        uidSender = listNotification.docs[i]['uidSender'];
+        uidreceiver = listNotification.docs[i]['uidreceiver'];
       }
 
       if (uidSender == FirebaseAuth.instance.currentUser!.uid ||

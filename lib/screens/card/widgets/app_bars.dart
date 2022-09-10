@@ -9,8 +9,13 @@ AppBar AppBarWinpeCard(BuildContext context) {
     ),
     centerTitle: true,
     title: Text("Thẻ Winpe Pay", style: textHeaderScreen),
-    iconTheme: IconThemeData(
-      color: mobileBackgroundColor, //change your color here
-    ),
+    leading: IconButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        icon: Icon(
+          Icons.arrow_back,
+          color: mobileBackgroundColor,
+        )),
   );
 }

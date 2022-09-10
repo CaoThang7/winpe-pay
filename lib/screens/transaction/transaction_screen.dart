@@ -104,7 +104,9 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                           ),
                         );
                       })
-                  : DataEmpty()),
+                  : DataEmpty(
+                      text: "Chưa có giao dịch nào...",
+                    )),
     );
   }
 }

@@ -4,7 +4,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:winpe_pay/screens/login/widgets/styles.dart';
 
 class DataEmpty extends StatefulWidget {
-  const DataEmpty({Key? key}) : super(key: key);
+  final String text;
+  const DataEmpty({Key? key, required this.text}) : super(key: key);
 
   @override
   State<DataEmpty> createState() => _DataEmptyState();
@@ -13,20 +14,22 @@ class DataEmpty extends StatefulWidget {
 class _DataEmptyState extends State<DataEmpty> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.asset(
-          "assets/images/no-data.png",
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 15),
-          child: Center(
-              child: Text(
-            "Chưa có giao dịch nào...",
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 50),
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          Image.asset(
+            "assets/images/wallet.png",
+            height: 200,
+            width: 200,
+          ),
+          Text(
+            widget.text,
             style: textWelcomeBack,
-          )),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }
