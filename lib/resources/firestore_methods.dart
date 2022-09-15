@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:winpe_pay/models/gift.dart';
 import 'package:winpe_pay/models/notification.dart' as model;
 import 'package:winpe_pay/resources/storage_methods.dart';
 import 'package:winpe_pay/screens/account/profile_screen.dart';
@@ -247,5 +248,46 @@ class FireStoreMethods {
       }
     } catch (err) {}
     return res;
+  }
+
+  //fetch data gift with type
+  Future<void> fetchGift({
+    required BuildContext context,
+    required List? giftTT,
+    required List? giftHOT,
+  }) async {
+    try {
+      var gifts = await FirebaseFirestore.instance.collection('gifts').get();
+      for (int i = 0; i < gifts.docs.length; i++) {
+        var giftItems = gifts.docs[i];
+        if (giftItems['type'] == "VCTT") {
+          giftTT?.add(giftItems);
+        } else {
+          giftHOT?.add(giftItems);
+        }
+      }
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  //search name gift
+  Future<void> searchGift({
+    required BuildContext context,
+    required String? searchQuery,
+    required List? dataGift,
+  }) async {
+    try {
+      var listGift = await _firestore
+          .collection('gifts')
+          .where('name', isEqualTo: searchQuery)
+          .get();
+      for (int i = 0; i < listGift.docs.length; i++) {
+        var giftItems = listGift.docs[i];
+        dataGift?.add(giftItems);
+      }
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
   }
 }
