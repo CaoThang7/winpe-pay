@@ -6,6 +6,15 @@ import 'package:winpe_pay/screens/voucher/voucher_screen.dart';
 import 'dart:math';
 
 class GlobalVariables {
+  // COLORS
+  static const appBarGradient = LinearGradient(
+    colors: [
+      Color(0xffcc2b5e),
+      Color(0xff753a88)
+    ],
+    stops: [0.5, 1.0],
+  );
+
   static var logoAppBig = Image.asset(
     'assets/images/arctic-fox.jpg',
     height: 150,

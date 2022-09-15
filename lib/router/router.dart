@@ -7,10 +7,12 @@ import 'package:winpe_pay/screens/login/otp_screen.dart';
 import 'package:winpe_pay/screens/notification/notification_screen.dart';
 import 'package:winpe_pay/screens/payment/payment_screen.dart';
 import 'package:winpe_pay/screens/payment/payment_success.dart';
+import 'package:winpe_pay/screens/search/search_screen.dart';
 import 'package:winpe_pay/screens/splash/splash_screen.dart';
 import 'package:winpe_pay/screens/support/support_screen.dart';
 import 'package:winpe_pay/screens/transaction/transaction_detail.dart';
 import 'package:winpe_pay/screens/transaction/transaction_screen.dart';
+import 'package:winpe_pay/screens/voucher/voucher_detail.dart';
 import 'package:winpe_pay/widgets/bottom_bar.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -85,6 +87,22 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const NotificationScreen(),
+      );
+    case VoucherDetail.routeName:
+      var dataGift = routeSettings.arguments;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => VoucherDetail(
+          dataGift: dataGift,
+        ),
+      );
+    case SearchScreen.routeName:
+      var searchQuery = routeSettings.arguments as String;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => SearchScreen(
+          searchQuery: searchQuery,
+        ),
       );
     default:
       return MaterialPageRoute(
