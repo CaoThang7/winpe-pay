@@ -3,6 +3,7 @@ import 'package:winpe_pay/providers/user_provider.dart';
 import 'package:winpe_pay/router/router.dart';
 import 'package:winpe_pay/screens/splash/splash_screen.dart';
 import 'package:winpe_pay/utils/colors.dart';
+import 'package:winpe_pay/utils/global_variable.dart';
 import 'responsive/mobile_screen_layout.dart';
 import 'responsive/responsive_layout.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,6 +41,11 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           title: 'Winpe Pay App',
           theme: ThemeData(
+            tabBarTheme: TabBarTheme(
+              labelColor: Colors.pink,
+              unselectedLabelColor: Colors.grey,
+            ),
+            primarySwatch: Colors.pink,
             scaffoldBackgroundColor: mobileBackgroundColor,
             colorScheme: const ColorScheme.light(
               primary: colorScheme,

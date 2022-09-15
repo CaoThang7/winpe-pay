@@ -56,6 +56,17 @@ TextStyle get textStandardBold{
   );
 }
 
+TextStyle get textStandardBoldBlack{
+  return (
+    TextStyle(
+      fontSize: 16,
+      fontFamily: 'Roboto',
+      color: Colors.black,
+      fontWeight: FontWeight.bold,
+    )
+  );
+}
+
 TextStyle get textStandard{
   return (
     TextStyle(
@@ -184,3 +195,34 @@ TextStyle get textStandardBlack{
   );
 }
 
+TextStyle get textExpiryDate {
+  return (
+    TextStyle(
+      fontSize: 16,
+      fontFamily: 'Roboto',
+      color: secondaryColor
+    )
+  );
+}
+
+TextStyle get textNameDetailGift {
+  return (
+    TextStyle(
+      fontSize: 20,
+      fontFamily: 'Arsenal-Bold',
+      color: Colors.black,
+      fontWeight: FontWeight.bold
+    )
+  );
+}
+
+TextStyle get textExpiryDatelGift {
+  return (
+    TextStyle(
+      fontSize: 16,
+      fontFamily: 'Roboto',
+      color: Colors.red,
+      fontWeight: FontWeight.bold
+    )
+  );
+}
