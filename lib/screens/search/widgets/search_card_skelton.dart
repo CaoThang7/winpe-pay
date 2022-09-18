@@ -15,7 +15,7 @@ class SearchCardSkelton extends StatelessWidget {
           Row(
             children: [
               const Skeleton(
-                height: 150,
+                height: 170,
                 width: 360,
               ),
             ],

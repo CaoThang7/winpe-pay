@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:winpe_pay/providers/user_provider.dart';
+import 'package:winpe_pay/resources/auth_methods.dart';
+import 'package:winpe_pay/resources/firestore_methods.dart';
 import 'package:winpe_pay/screens/login/widgets/styles.dart';
 import 'package:winpe_pay/utils/colors.dart';
+import 'package:winpe_pay/utils/global_variable.dart';
 import 'package:winpe_pay/widgets/custom_button.dart';
 import 'package:intl/intl.dart';
+import 'package:winpe_pay/widgets/loader.dart';
 
 class DetailCard extends StatefulWidget {
   final dataGift;
@@ -13,12 +19,41 @@ class DetailCard extends StatefulWidget {
 }
 
 class _DetailCardState extends State<DetailCard> {
-  String imageEmpty = 'https://archive.org/download/no-photo-available/no-photo-available.png';
+  FireStoreMethods fireStoreMethods = FireStoreMethods();
+  AuthMethods authMethods = AuthMethods();
+  bool _isLoading = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    authMethods.getUserDetails(context);
+  }
+
+  void giftExchange(String? diamondUser, String? uidUser) {
+    setState(() {
+      _isLoading = true;
+    });
+    Future.delayed(const Duration(seconds: 2), () {
+      if (this.mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        fireStoreMethods.giftExchange(
+            context: context,
+            diamondUser: diamondUser,
+            diamondGift: widget.dataGift['diamond'].toString(),
+            uidGift: widget.dataGift['uid'],
+            uidUser: uidUser);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     DateTime date = DateTime.parse(widget.dataGift['expiryDate'].toDate().toString());
     String expiryDate = DateFormat('MM/dd/yyyy').format(date);
+    final uid = context.watch<UserProvider>().user;
     return Container(
       height: size.height,
       width: size.width,
@@ -47,7 +82,7 @@ class _DetailCardState extends State<DetailCard> {
                   fit: BoxFit.cover,
                   image: NetworkImage('${widget.dataGift['image']}'.isNotEmpty
                       ? '${widget.dataGift['image']}'
-                      : imageEmpty),
+                      : GlobalVariables().imageEmpty),
                 ),
               ),
             ),
@@ -141,10 +176,17 @@ class _DetailCardState extends State<DetailCard> {
                         width: size.width,
                         child: Column(
                           children: [
-                            CustomButton(
-                              text: 'Đổi ngay (${widget.dataGift['diamond'].toString()} kim cương)',
-                              onTap: () {},
-                            ),
+                            _isLoading
+                                ? Loader()
+                                : CustomButton(
+                                    text: 'Đổi ngay (${widget.dataGift['diamond'].toString()} kim cương)',
+                                    onTap: () {
+                                      giftExchange(
+                                          uid?.diamond.toString(),
+                                          uid?.uid
+                                      );
+                                    },
+                                  ),
                           ],
                         )),
                   ),

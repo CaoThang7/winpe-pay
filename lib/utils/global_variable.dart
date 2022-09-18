@@ -8,10 +8,7 @@ import 'dart:math';
 class GlobalVariables {
   // COLORS
   static const appBarGradient = LinearGradient(
-    colors: [
-      Color(0xffcc2b5e),
-      Color(0xff753a88)
-    ],
+    colors: [Color(0xffcc2b5e), Color(0xff753a88)],
     stops: [0.5, 1.0],
   );
 
@@ -41,11 +38,25 @@ class GlobalVariables {
     width: 35,
   );
 
+  static var imageSuccess = Image.network(
+    "https://t4.ftcdn.net/jpg/02/22/29/41/240_F_222294164_NUH8FmMaeHKJ2ZY0HfqTwSfbJgxqnZI1.jpg",
+    height: 150,
+    width: 150,
+  );
+
+  static var imageError = Image.asset(
+    "assets/images/error.png",
+    height: 100,
+    width: 100,
+  );
+
   String avatarProfile = "https://i.stack.imgur.com/l60Hf.png";
 
   String loadingLottie = "https://assets6.lottiefiles.com/packages/lf20_lb3jx6jr.json";
 
   String paymentSuccess = "https://assets5.lottiefiles.com/private_files/lf30_qr37agb3.json";
+
+  String imageEmpty = 'https://archive.org/download/no-photo-available/no-photo-available.png';
 
   static const List<String> carouselImages = [
     'https://designercomvn.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2017/08/26020137/nhan-thiet-ke-banner-trung-thu-gia-re-thu-hut-khach-hang8.jpg',
