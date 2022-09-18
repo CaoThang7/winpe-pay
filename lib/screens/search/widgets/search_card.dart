@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:winpe_pay/screens/login/widgets/styles.dart';
 import 'package:winpe_pay/utils/colors.dart';
 import 'package:intl/intl.dart';
+import 'package:winpe_pay/utils/global_variable.dart';
 
 class SearchCard extends StatefulWidget {
   final dataGift;
@@ -12,7 +13,6 @@ class SearchCard extends StatefulWidget {
 }
 
 class _SearchCardState extends State<SearchCard> {
-  String imageEmpty = 'https://archive.org/download/no-photo-available/no-photo-available.png';
   @override
   Widget build(BuildContext context) {
     DateTime date = DateTime.parse(widget.dataGift['expiryDate'].toDate().toString());
@@ -30,20 +30,19 @@ class _SearchCardState extends State<SearchCard> {
             ),
           ],
         ),
-        width: 360,
         child: Column(
           children: [
             Stack(
               children: [
                 Container(
-                  height: 150,
+                  height: 170,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     image: DecorationImage(
                       image: NetworkImage(
                           '${widget.dataGift['image']}'.isNotEmpty
                               ? '${widget.dataGift['image']}'
-                              : imageEmpty),
+                              : GlobalVariables().imageEmpty),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -121,6 +120,9 @@ class _SearchCardState extends State<SearchCard> {
                         style: textExpiryDate,
                       )
                     ],
+                  ),
+                  SizedBox(
+                    height: 10,
                   )
                 ],
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:winpe_pay/screens/voucher/my_gift_screen.dart';
 import 'package:winpe_pay/screens/voucher/widgets/gift.dart';
 
 class TabBarViewCustom extends StatefulWidget {
@@ -15,7 +16,7 @@ class _TabBarViewCustomState extends State<TabBarViewCustom> {
         child: TabBarView(
       children: [
         Gift(),
-        Text("two"),
+        MyGiftScreen()
       ],
     ));
   }

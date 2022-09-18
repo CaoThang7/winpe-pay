@@ -21,7 +21,7 @@ class CustomButton extends StatelessWidget {
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 50),
-        primary: primaryColor,
+        backgroundColor: primaryColor,
       ),
     );
   }
@@ -47,7 +47,7 @@ class CustomButtonCancel extends StatelessWidget {
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 50),
-        primary: Color.fromARGB(255, 184, 28, 17),
+        backgroundColor: Color.fromARGB(255, 184, 28, 17),
       ),
     );
   }

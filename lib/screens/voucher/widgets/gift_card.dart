@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:winpe_pay/screens/login/widgets/styles.dart';
 import 'package:winpe_pay/utils/colors.dart';
 import 'package:intl/intl.dart';
+import 'package:winpe_pay/utils/global_variable.dart';
 
 class GiftCard extends StatefulWidget {
   final dataGift;
@@ -12,7 +13,6 @@ class GiftCard extends StatefulWidget {
 }
 
 class _GiftCardState extends State<GiftCard> {
-  String imageEmpty = 'https://archive.org/download/no-photo-available/no-photo-available.png';
   @override
   Widget build(BuildContext context) {
     DateTime date = DateTime.parse(widget.dataGift['expiryDate'].toDate().toString());
@@ -47,7 +47,7 @@ class _GiftCardState extends State<GiftCard> {
                         image: NetworkImage(
                             '${widget.dataGift['image']}'.isNotEmpty
                                 ? '${widget.dataGift['image']}'
-                                : imageEmpty),
+                                : GlobalVariables().imageEmpty),
                         fit: BoxFit.fill,
                       ),
                     ),

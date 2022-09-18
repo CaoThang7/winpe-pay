@@ -4,6 +4,7 @@ import 'package:winpe_pay/screens/account/profile_screen.dart';
 import 'package:winpe_pay/screens/account/widgets/app_bars.dart';
 import 'package:winpe_pay/screens/account/widgets/setting_card.dart';
 import 'package:winpe_pay/screens/card/winpe_card_screen.dart';
+import 'package:winpe_pay/screens/gift/user_gift_screen.dart';
 import 'package:winpe_pay/screens/notification/notification_screen.dart';
 import 'package:winpe_pay/screens/transaction/transaction_screen.dart';
 import 'package:winpe_pay/utils/global_variable.dart';
@@ -51,7 +52,7 @@ class _AccountScreenState extends State<AccountScreen> {
     } else if (dataSettingsUser == '4') {
       Navigator.pushNamed(context, NotificationScreen.routeName);
     } else if (dataSettingsUser == '5') {
-      print("sale");
+      Navigator.pushNamed(context, UserGiftScreen.routeName);
     } else if (dataSettingsUser == '6') {
       logout();
     }
@@ -73,8 +74,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     onTap: () {
                       navigateSetting(dataSettings['id']);
                     },
-                    child:
-                        SettingCard(dataSettings: dataSettings, index: index),
+                    child: SettingCard(dataSettings: dataSettings, index: index),
                   );
                 },
               ),
