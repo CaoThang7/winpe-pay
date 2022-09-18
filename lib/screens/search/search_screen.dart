@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:winpe_pay/resources/firestore_methods.dart';
+import 'package:winpe_pay/screens/login/widgets/styles.dart';
 import 'package:winpe_pay/screens/search/widgets/app_bars.dart';
 import 'package:winpe_pay/screens/search/widgets/search_card.dart';
 import 'package:winpe_pay/screens/search/widgets/search_card_skelton.dart';
+import 'package:winpe_pay/screens/transaction/widgets/data_empty.dart';
 import 'package:winpe_pay/screens/voucher/voucher_detail.dart';
 import 'package:winpe_pay/screens/voucher/widgets/gift_card_skelton.dart';
 
@@ -58,29 +60,29 @@ class _SearchScreenState extends State<SearchScreen> {
           child: Column(
             children: [
               Container(
-                height: 230,
+                height: MediaQuery.of(context).size.height,
                 child: _isLoading
                     ? ListView.builder(
-                        scrollDirection: Axis.horizontal,
                         itemCount: 1,
                         itemBuilder: (context, index) =>
                             const SearchCardSkelton(),
                       )
-                    : ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: listGift!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final dataGift = listGift![index];
-                          return GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  VoucherDetail.routeName,
-                                  arguments: dataGift,
-                                );
-                              },
-                              child: SearchCard(dataGift: dataGift));
-                        }),
+                    : listGift!.length == 0
+                        ? DataEmpty(text: "Không tìm thấy quà tặng nào")
+                        : ListView.builder(
+                            itemCount: listGift!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final dataGift = listGift![index];
+                              return GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      VoucherDetail.routeName,
+                                      arguments: dataGift,
+                                    );
+                                  },
+                                  child: SearchCard(dataGift: dataGift));
+                            }),
               ),
             ],
           ),

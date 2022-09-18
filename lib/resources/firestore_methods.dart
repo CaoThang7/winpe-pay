@@ -7,6 +7,7 @@ import 'package:winpe_pay/models/gift.dart';
 import 'package:winpe_pay/models/notification.dart' as model;
 import 'package:winpe_pay/resources/storage_methods.dart';
 import 'package:winpe_pay/screens/account/profile_screen.dart';
+import 'package:winpe_pay/screens/gift/gift_success.dart';
 import 'package:winpe_pay/utils/global_variable.dart';
 import 'package:winpe_pay/utils/utils.dart';
 import 'dart:async';
@@ -14,6 +15,7 @@ import 'package:winpe_pay/models/transfer_content.dart' as model;
 import 'package:uuid/uuid.dart';
 import 'package:winpe_pay/resources/message_methods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:winpe_pay/models/mygift.dart' as model;
 
 class FireStoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -286,6 +288,96 @@ class FireStoreMethods {
         var giftItems = listGift.docs[i];
         dataGift?.add(giftItems);
       }
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  // Exchange gift with diamond
+  Future<void> giftExchange(
+      {required BuildContext context,
+      required String? diamondUser,
+      required String diamondGift,
+      required String? uidGift,
+      required String? uidUser}) async {
+    String mygiftId = const Uuid().v1();
+    try {
+      if (int.parse(diamondUser!) >= int.parse(diamondGift)) {
+        showDiaLogGift(
+          context,
+          "Thành công rồi",
+          "Cảm ơn bạn đã sử dụng dịch vụ của Winpe Pay",
+          GlobalVariables.imageSuccess,
+        );
+
+        var giftItem = await FirebaseFirestore.instance
+            .collection('gifts')
+            .doc(uidGift)
+            .get();
+
+        model.MyGift myGift = model.MyGift(
+            uid: mygiftId,
+            userId: uidUser,
+            giftId: uidGift,
+            status: true,
+            gift: giftItem.data());
+
+        //create table database mygifts in firestore
+        await _firestore
+            .collection("mygifts")
+            .doc(mygiftId)
+            .set(myGift.toJson());
+
+        //update diamond user
+        await _firestore.collection('users').doc(uidUser).update(
+            {"diamond": int.parse(diamondUser) - int.parse(diamondGift)});
+      } else {
+        showDiaLogGift(
+          context,
+          "không đủ kim cương",
+          "Vui lòng chọn những ưu đãi khác",
+          GlobalVariables.imageError,
+        );
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  //fetch data my gifts with id user
+  Future<void> fetchMyGift({
+    required BuildContext context,
+    required List? dataMyGift,
+  }) async {
+    try {
+      var mygifts = await FirebaseFirestore.instance
+          .collection('mygifts')
+          .where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .get();
+      for (int i = 0; i < mygifts.docs.length; i++) {
+        var giftItems = mygifts.docs[i];
+        dataMyGift?.add(giftItems);
+      }
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  //update status MyGift
+  Future<void> updateStatusMyGift({
+    required BuildContext context,
+    required String? uidMyGift,
+  }) async {
+    try {
+      await _firestore
+          .collection('mygifts')
+          .doc(uidMyGift)
+          .update({"status": false});
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        GiftSuccess.routeName,
+        (route) => false,
+      );
     } catch (e) {
       showSnackBar(context, e.toString());
     }

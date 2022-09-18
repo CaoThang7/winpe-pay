@@ -56,6 +56,17 @@ TextStyle get textStandardBold{
   );
 }
 
+TextStyle get textStandardBoldGrey{
+  return (
+    TextStyle(
+      fontSize: 16,
+      fontFamily: 'Roboto',
+      color: Color.fromARGB(255, 206, 205, 205),
+      fontWeight: FontWeight.bold,
+    )
+  );
+}
+
 TextStyle get textStandardBoldBlack{
   return (
     TextStyle(
@@ -191,6 +202,16 @@ TextStyle get textStandardBlack{
       fontSize: 16,
       fontFamily: 'Roboto',
       color: Colors.black,
+    )
+  );
+}
+
+TextStyle get textStandardGrey{
+  return (
+    TextStyle(
+      fontSize: 16,
+      fontFamily: 'Roboto',
+      color: Color.fromARGB(255, 206, 205, 205),
     )
   );
 }
